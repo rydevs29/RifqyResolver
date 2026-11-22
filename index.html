@@ -57,7 +57,7 @@
 
     .app-shell {
       width: 100%;
-      max-width: 1080px;
+      max-width: 920px;
       margin: 0 auto;
       padding: 24px 16px 56px;
     }
@@ -75,7 +75,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
 
     .brand {
@@ -132,14 +132,14 @@
       box-shadow: 0 0 10px var(--success);
     }
 
-    /* Resolver Selector Pills */
-    .provider-section {
-      margin-bottom: 20px;
+    /* Supported Platforms */
+    .platforms-section {
+      margin-bottom: 18px;
     }
 
     .section-label {
       display: block;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.06em;
@@ -147,84 +147,77 @@
       margin-bottom: 10px;
     }
 
-    .provider-grid {
+    .platforms-list {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
+      gap: 8px;
     }
 
     @media (min-width: 640px) {
-      .provider-grid {
+      .platforms-list {
         grid-template-columns: repeat(3, 1fr);
       }
     }
 
     @media (min-width: 900px) {
-      .provider-grid {
+      .platforms-list {
         grid-template-columns: repeat(5, 1fr);
       }
     }
 
-    .provider-btn {
+    .platform-chip {
       appearance: none;
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: 12px 14px;
-      text-align: left;
+      border-radius: var(--radius-sm);
+      padding: 9px 11px;
       color: var(--text-secondary);
-      cursor: pointer;
-      transition: all 0.16s ease;
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 500;
       display: flex;
-      flex-direction: column;
-      gap: 4px;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+      text-align: left;
     }
 
-    .provider-btn:hover {
-      border-color: rgba(148, 163, 184, 0.32);
-      background: var(--bg-elevated);
+    .platform-chip:hover {
+      border-color: rgba(148, 163, 184, 0.35);
       color: var(--text-primary);
+      background: var(--bg-elevated);
     }
 
-    .provider-btn.active {
+    .platform-chip.active {
       border-color: var(--accent);
       background: var(--accent-soft);
       color: var(--text-primary);
-      box-shadow: inset 0 0 0 1px rgba(56, 189, 248, 0.25);
     }
 
-    .provider-name {
-      font-size: 0.9rem;
-      font-weight: 600;
-      line-height: 1.25;
-    }
-
-    .provider-route {
+    .platform-logo {
+      width: 18px;
+      height: 18px;
+      border-radius: 5px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
       font-family: "JetBrains Mono", monospace;
-      font-size: 0.72rem;
-      color: var(--text-muted);
+      font-size: 0.65rem;
+      font-weight: 700;
+    }
+
+    .platform-name {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .provider-btn.active .provider-route {
-      color: var(--accent);
-    }
-
-    /* Main Workspace Grid */
-    .workspace-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-      align-items: start;
-    }
-
-    @media (min-width: 960px) {
-      .workspace-grid {
-        grid-template-columns: 1.05fr 0.95fr;
-        gap: 24px;
-      }
+    /* Main Stack */
+    .workspace-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
     }
 
     /* Cards */
@@ -244,31 +237,32 @@
 
     .card-header {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       justify-content: space-between;
       gap: 12px;
-      padding-bottom: 16px;
-      margin-bottom: 20px;
+      padding-bottom: 14px;
+      margin-bottom: 18px;
       border-bottom: 1px solid var(--border-subtle);
     }
 
     .card-title {
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       font-weight: 600;
       letter-spacing: -0.015em;
     }
 
     .card-desc {
-      font-size: 0.84rem;
+      font-size: 0.82rem;
       color: var(--text-secondary);
-      margin-top: 4px;
+      margin-top: 2px;
     }
 
-    .endpoint-pill {
+    .detected-tag {
       font-family: "JetBrains Mono", monospace;
-      font-size: 0.72rem;
-      padding: 5px 9px;
-      border-radius: var(--radius-sm);
+      font-size: 0.74rem;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 999px;
       background: var(--bg-elevated);
       border: 1px solid var(--border-subtle);
       color: var(--accent);
@@ -278,7 +272,7 @@
 
     /* Form Controls */
     .form-group {
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .form-label {
@@ -292,7 +286,7 @@
     }
 
     .form-hint {
-      font-size: 0.76rem;
+      font-size: 0.75rem;
       color: var(--text-muted);
       margin-top: 6px;
     }
@@ -328,11 +322,11 @@
 
     .option-panel {
       display: none;
-      padding: 14px;
+      padding: 13px 14px;
       border-radius: var(--radius-md);
       background: var(--bg-elevated);
       border: 1px solid var(--border-subtle);
-      margin-bottom: 18px;
+      margin-bottom: 14px;
     }
 
     .option-panel.visible {
@@ -343,7 +337,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 20px;
+      margin-top: 16px;
     }
 
     .btn {
@@ -415,7 +409,7 @@
 
     /* Result / Output Area */
     .result-state {
-      min-height: 220px;
+      min-height: 140px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -423,9 +417,9 @@
 
     .empty-state {
       text-align: center;
-      padding: 36px 16px;
+      padding: 28px 16px;
       color: var(--text-muted);
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       border: 1px dashed var(--border-subtle);
       border-radius: var(--radius-md);
     }
@@ -460,11 +454,11 @@
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-md);
       padding: 14px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .target-label {
-      font-size: 0.74rem;
+      font-size: 0.73rem;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.05em;
@@ -490,7 +484,6 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 10px;
-      margin-bottom: 16px;
     }
 
     @media (min-width: 520px) {
@@ -519,35 +512,6 @@
       font-size: 0.82rem;
       color: var(--text-primary);
       word-break: break-word;
-    }
-
-    .raw-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 8px;
-    }
-
-    .raw-title {
-      font-size: 0.76rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--text-muted);
-    }
-
-    pre.json-view {
-      background: var(--bg-input);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: 14px;
-      font-family: "JetBrains Mono", monospace;
-      font-size: 0.78rem;
-      line-height: 1.5;
-      color: #cbd5e1;
-      overflow-x: auto;
-      max-height: 340px;
-      white-space: pre;
     }
 
     .toast {
@@ -582,41 +546,41 @@
         <div class="brand-mark">RR</div>
         <div>
           <h1 class="brand-title">RifqyResolver</h1>
-          <p class="brand-subtitle">Shortlink &amp; Key System Resolver via Vercel Serverless API</p>
+          <p class="brand-subtitle">Universal Link &amp; Key Bypass</p>
         </div>
       </div>
       <div class="status-chip">
         <span class="status-dot"></span>
-        <span>5 ENDPOINTS ACTIVE</span>
+        <span>AUTO DETECT</span>
       </div>
     </header>
 
-    <section class="provider-section" aria-label="Pilih Resolver">
-      <span class="section-label">Pilih Layanan Bypass</span>
-      <div class="provider-grid" id="providerGrid"></div>
+    <section class="platforms-section" aria-label="Supported Platforms">
+      <span class="section-label">Supported Platforms</span>
+      <div class="platforms-list" id="platformsList"></div>
     </section>
 
-    <main class="workspace-grid">
+    <main class="workspace-stack">
       <section class="card" aria-label="Form Input">
         <div class="card-header">
           <div>
-            <h2 class="card-title" id="activeTitle">Safelinku Resolver</h2>
-            <p class="card-desc" id="activeDesc"></p>
+            <h2 class="card-title">Tempel Link atau Ticket</h2>
+            <p class="card-desc">Layanan dideteksi otomatis saat link ditempel atau diketik.</p>
           </div>
-          <span class="endpoint-pill" id="activeEndpoint">/api/safelinku</span>
+          <span class="detected-tag" id="detectedTag">Safelinku</span>
         </div>
 
         <form id="resolveForm" novalidate>
           <div class="form-group">
             <label class="form-label" for="targetInput">
-              <span id="inputLabel">Target URL</span>
+              <span>Input URL / Ticket</span>
               <button type="button" class="btn btn-secondary btn-sm" id="sampleBtn">Isi Contoh</button>
             </label>
             <input
               type="text"
               id="targetInput"
               class="input-control mono"
-              placeholder="https://sfl.gl/D0Ze5"
+              placeholder="Tempel link atau ticket di sini..."
               autocomplete="off"
               spellcheck="false"
               required
@@ -666,15 +630,15 @@
       <section class="card" aria-label="Hasil Resolve">
         <div class="card-header">
           <div>
-            <h2 class="card-title">Hasil Ekstraksi</h2>
-            <p class="card-desc">Output terstruktur dan respons JSON mentah dari endpoint.</p>
+            <h2 class="card-title">Hasil</h2>
+            <p class="card-desc">Output utama dari proses resolve.</p>
           </div>
           <span class="badge badge-info" id="statusBadge">IDLE</span>
         </div>
 
         <div class="result-state" id="resultContainer">
           <div class="empty-state" id="emptyState">
-            Masukkan URL atau ticket di sebelah kiri lalu klik <strong>Resolve Link</strong>.
+            Tempel URL atau ticket lalu klik <strong>Resolve Link</strong>.
           </div>
 
           <div id="resultContent" style="display: none;">
@@ -688,12 +652,6 @@
             </div>
 
             <div class="meta-grid" id="metaGrid"></div>
-
-            <div class="raw-header">
-              <span class="raw-title">Raw JSON Response</span>
-              <button type="button" class="btn btn-secondary btn-sm" id="copyJsonBtn">Salin JSON</button>
-            </div>
-            <pre class="json-view" id="rawJsonView"></pre>
           </div>
         </div>
       </section>
@@ -707,55 +665,55 @@
       {
         id: "safelinku",
         name: "Safelinku",
+        logoText: "SL",
+        logoBg: "rgba(56, 189, 248, 0.16)",
+        logoColor: "#38bdf8",
         endpoint: "/api/safelinku",
-        desc: "Ekstrak URL tujuan akhir dari shortlink Safelinku.",
-        inputLabel: "Safelinku URL",
-        placeholder: "https://sfl.gl/D0Ze5",
-        hint: "Mendukung sfl.gl, safelinku.com, linku.to, dan lokerwfh.net.",
+        hint: "Safelinku: sfl.gl, safelinku.com, linku.to, lokerwfh.net.",
         sample: "https://sfl.gl/D0Ze5",
         panel: "panelSafelinku"
       },
       {
         id: "sub4unlock",
         name: "Sub4Unlock",
+        logoText: "S4",
+        logoBg: "rgba(168, 85, 247, 0.16)",
+        logoColor: "#c084fc",
         endpoint: "/api/sub4unlock",
-        desc: "Resolve URL tujuan dari tautan Sub4Unlock (resolve endpoint).",
-        inputLabel: "Sub4Unlock URL",
-        placeholder: "https://sub4unlock.co/I9zoNVN",
-        hint: "Masukkan URL sub4unlock.co/<alias> atau sub4unlock.io/<kode>.",
+        hint: "Sub4Unlock: sub4unlock.co/<alias> atau sub4unlock.io/<kode>.",
         sample: "https://sub4unlock.co/I9zoNVN",
         panel: "panelSub4Unlock"
       },
       {
         id: "platoboost",
         name: "Platoboost",
+        logoText: "PB",
+        logoBg: "rgba(34, 197, 94, 0.16)",
+        logoColor: "#4ade80",
         endpoint: "/api/platoboost",
-        desc: "Dapatkan whitelist key, nama layanan, dan sisa durasi key.",
-        inputLabel: "Platoboost Gateway URL / Ticket",
-        placeholder: "https://auth.platorelay.com/a?d=...",
-        hint: "Masukkan URL gateway auth.platorelay.com atau nilai ticket-nya saja.",
+        hint: "Platoboost: auth.platorelay.com/a?d=... atau ticket.",
         sample: "https://auth.platorelay.com/a?d=acDPpme9uTq8Tf5KGDlfE2vZVDRoCdH5C04KTPP5acl2KjZE810EDJx8AsxBL4DcTWWkZ0fw77mNzzO6Ji0gk4M2C0Cd8PadI8kQ9rIxYRNIhuIZc8At7PubKFoovBYHmNwEvccazXWodhwlIplGRFznwPO87YIZzFNBzey6txlI6Cqj7NUoZzKabRqkQPv8Y8PYqwlZ6bFEGhEwvdheih5Vp9fzxieCSDVWnVZwYW3jUZHKq57uXrCqELwjHTEjkDaem4bHlPMWwb9MTKLiagAu3oLPwN6f2a0uYgQxdR2O5u00844RNudt79T7GE5D5AoAKgm4svWCaTp0MCAx6PJdvb9pCsXAfGop1Lygoi40nsbzH5WRCbUKLbT05VtlffxjwkNVYJxeg37wGAJs7cwxCWhieVvry1Bx2eqbCiGB6ruAApCTdIJChVJ4Ok9MDPfgOaGl5Ey8LoLzVnObxFhFLllSC0KNQMWw4AUn",
         panel: null
       },
       {
         id: "linkvertise",
         name: "Linkvertise",
+        logoText: "LV",
+        logoBg: "rgba(251, 146, 60, 0.16)",
+        logoColor: "#fb923c",
         endpoint: "/api/linkvertise",
-        desc: "Resolve Linkvertise dan jaringan terkait ke URL tujuan.",
-        inputLabel: "Linkvertise URL atau <userId>/<slug>",
-        placeholder: "https://linkvertise.com/119714/EzHub",
-        hint: "Mendukung linkvertise.com, link-to.net, link-hub.net, link-target.org/net, link-center.net, direct-link.net, atau <userId>/<slug>.",
+        hint: "Linkvertise: linkvertise.com, link-to.net, link-hub.net, link-target.org/net, link-center.net, direct-link.net, atau <userId>/<slug>.",
         sample: "https://linkvertise.com/119714/EzHub",
         panel: null
       },
       {
         id: "sub2unlock-bypass",
         name: "Sub2Unlock Bypass",
+        logoText: "S2",
+        logoBg: "rgba(244, 63, 94, 0.16)",
+        logoColor: "#fb7185",
         endpoint: "/api/sub2unlock-bypass",
-        desc: "Bypass tautan Sub2Unlock langsung ke URL tujuan akhir.",
-        inputLabel: "Sub2Unlock Locked URL",
-        placeholder: "https://sub2unlock.com/hYTuA",
-        hint: "Masukkan URL locked link Sub2Unlock yang ingin di-bypass.",
+        hint: "Sub2Unlock Bypass: sub2unlock.com/<alias>.",
         sample: "https://sub2unlock.com/hYTuA",
         panel: null
       }
@@ -763,13 +721,9 @@
 
     let activeProvider = PROVIDERS[0];
     let latestPrimaryValue = "";
-    let latestJsonString = "";
 
-    const providerGrid = document.getElementById("providerGrid");
-    const activeTitle = document.getElementById("activeTitle");
-    const activeDesc = document.getElementById("activeDesc");
-    const activeEndpoint = document.getElementById("activeEndpoint");
-    const inputLabel = document.getElementById("inputLabel");
+    const platformsList = document.getElementById("platformsList");
+    const detectedTag = document.getElementById("detectedTag");
     const targetInput = document.getElementById("targetInput");
     const inputHint = document.getElementById("inputHint");
     const panelSafelinku = document.getElementById("panelSafelinku");
@@ -790,8 +744,6 @@
     const copyPrimaryBtn = document.getElementById("copyPrimaryBtn");
     const openLinkBtn = document.getElementById("openLinkBtn");
     const metaGrid = document.getElementById("metaGrid");
-    const rawJsonView = document.getElementById("rawJsonView");
-    const copyJsonBtn = document.getElementById("copyJsonBtn");
     const toastEl = document.getElementById("toast");
 
     let toastTimer = null;
@@ -802,18 +754,63 @@
       toastTimer = setTimeout(() => toastEl.classList.remove("show"), 2200);
     }
 
-    function renderProviders() {
-      providerGrid.innerHTML = "";
+    function detectProviderFromInput(raw) {
+      const val = String(raw || "").trim().toLowerCase();
+      if (!val) return null;
+
+      if (
+        val.includes("sfl.gl") ||
+        val.includes("safelinku.com") ||
+        val.includes("linku.to") ||
+        val.includes("lokerwfh.net")
+      ) {
+        return "safelinku";
+      }
+
+      if (
+        val.includes("platorelay.com") ||
+        val.includes("platoboost") ||
+        val.startsWith("auth.platorelay.com")
+      ) {
+        return "platoboost";
+      }
+
+      if (
+        val.includes("linkvertise.com") ||
+        val.includes("link-to.net") ||
+        val.includes("link-hub.net") ||
+        val.includes("link-target.org") ||
+        val.includes("link-target.net") ||
+        val.includes("link-center.net") ||
+        val.includes("direct-link.net") ||
+        /^[0-9]+\/[a-z0-9_-]+$/i.test(val)
+      ) {
+        return "linkvertise";
+      }
+
+      if (val.includes("sub4unlock.co") || val.includes("sub4unlock.io") || val.includes("sub4unlock")) {
+        return "sub4unlock";
+      }
+
+      if (val.includes("sub2unlock.com") || val.includes("sub2unlock")) {
+        return "sub2unlock-bypass";
+      }
+
+      return null;
+    }
+
+    function renderPlatforms() {
+      platformsList.innerHTML = "";
       PROVIDERS.forEach((p) => {
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = `provider-btn${p.id === activeProvider.id ? " active" : ""}`;
-        btn.innerHTML = `
-          <span class="provider-name">${p.name}</span>
-          <span class="provider-route">${p.endpoint}</span>
+        const chip = document.createElement("button");
+        chip.type = "button";
+        chip.className = `platform-chip${p.id === activeProvider.id ? " active" : ""}`;
+        chip.innerHTML = `
+          <span class="platform-logo" style="background:${p.logoBg};color:${p.logoColor};">${p.logoText}</span>
+          <span class="platform-name">${p.name}</span>
         `;
-        btn.addEventListener("click", () => selectProvider(p.id));
-        providerGrid.appendChild(btn);
+        chip.addEventListener("click", () => selectProvider(p.id));
+        platformsList.appendChild(chip);
       });
     }
 
@@ -822,17 +819,14 @@
       if (!found) return;
       activeProvider = found;
 
-      activeTitle.textContent = `${found.name} Resolver`;
-      activeDesc.textContent = found.desc;
-      activeEndpoint.textContent = found.endpoint;
-      inputLabel.textContent = found.inputLabel;
-      targetInput.placeholder = found.placeholder;
+      detectedTag.textContent = found.name;
+      targetInput.placeholder = found.sample;
       inputHint.textContent = found.hint;
 
       panelSafelinku.classList.toggle("visible", found.panel === "panelSafelinku");
       panelSub4Unlock.classList.toggle("visible", found.panel === "panelSub4Unlock");
 
-      renderProviders();
+      renderPlatforms();
     }
 
     function setLoading(isLoading) {
@@ -877,7 +871,6 @@
       const d = payload && typeof payload === "object" && payload.data ? payload.data : {};
 
       const candidates = [
-        ["Service", d.serviceName || payload.project],
         ["Alias / Slug", d.alias || d.slug],
         ["Duration", d.durationHours !== undefined ? `${d.durationHours} jam` : null],
         ["Hours Left", d.hoursLeft !== undefined ? `${d.hoursLeft} jam` : null],
@@ -906,10 +899,13 @@
 
       const primary = extractPrimaryResult(activeProvider.id, payload);
       latestPrimaryValue = primary.value || "";
-      latestJsonString = JSON.stringify(payload, null, 2);
 
       primaryOutputLabel.textContent = primary.label;
-      primaryOutputValue.textContent = latestPrimaryValue || (isOk ? "Tidak ada nilai utama di respons" : (payload?.message || payload?.error || "Gagal memproses permintaan"));
+      primaryOutputValue.textContent =
+        latestPrimaryValue ||
+        (isOk
+          ? "Tidak ada nilai utama di respons"
+          : payload?.message || payload?.error || "Gagal memproses permintaan");
 
       copyPrimaryBtn.disabled = !latestPrimaryValue;
 
@@ -932,9 +928,23 @@
         `
         )
         .join("");
-
-      rawJsonView.textContent = latestJsonString;
     }
+
+    targetInput.addEventListener("input", () => {
+      const detectedId = detectProviderFromInput(targetInput.value);
+      if (detectedId && detectedId !== activeProvider.id) {
+        selectProvider(detectedId);
+      }
+    });
+
+    targetInput.addEventListener("paste", () => {
+      setTimeout(() => {
+        const detectedId = detectProviderFromInput(targetInput.value);
+        if (detectedId && detectedId !== activeProvider.id) {
+          selectProvider(detectedId);
+        }
+      }, 0);
+    });
 
     resolveForm.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -944,6 +954,11 @@
         targetInput.focus();
         showToast("Parameter URL wajib diisi.");
         return;
+      }
+
+      const detectedId = detectProviderFromInput(rawUrl);
+      if (detectedId && detectedId !== activeProvider.id) {
+        selectProvider(detectedId);
       }
 
       const query = new URLSearchParams({ url: rawUrl });
@@ -1004,7 +1019,6 @@
       preGoDelayInput.value = "";
       confirmUnlockSelect.value = "";
       latestPrimaryValue = "";
-      latestJsonString = "";
       resultContent.style.display = "none";
       emptyState.style.display = "block";
       statusBadge.className = "badge badge-info";
@@ -1021,17 +1035,7 @@
       }
     });
 
-    copyJsonBtn.addEventListener("click", async () => {
-      if (!latestJsonString) return;
-      try {
-        await navigator.clipboard.writeText(latestJsonString);
-        showToast("JSON berhasil disalin.");
-      } catch {
-        showToast("Gagal menyalin JSON.");
-      }
-    });
-
     selectProvider(PROVIDERS[0].id);
   </script>
 </body>
-</html>
+    </html>
