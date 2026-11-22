@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RifqyResolver — Link &amp; Key Bypass Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-base: #090d16;
+      --bg-surface: #0f172a;
+      --bg-elevated: #162033;
+      --bg-input: #0b1220;
+      --border-subtle: rgba(148, 163, 184, 0.14);
+      --border-focus: #38bdf8;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent: #38bdf8;
+      --accent-hover: #0ea5e9;
+      --accent-soft: rgba(56, 189, 248, 0.12);
+      --success: #22c55e;
+      --success-soft: rgba(34, 197, 94, 0.12);
+      --danger: #f43f5e;
+      --danger-soft: rgba(244, 63, 94, 0.12);
+      --warning: #eab308;
+      --warning-soft: rgba(234, 179, 8, 0.12);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --shadow-card: 0 18px 40px -18px rgba(0, 0, 0, 0.65);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      min-height: 100%;
+      background-color: var(--bg-base);
+      color: var(--text-primary);
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body {
+      background-image:
+        radial-gradient(circle at 12% 8%, rgba(56, 189, 248, 0.11), transparent 36%),
+        radial-gradient(circle at 88% 12%, rgba(99, 102, 241, 0.09), transparent 38%);
+    }
+
+    .app-shell {
+      width: 100%;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 24px 16px 56px;
+    }
+
+    @media (min-width: 768px) {
+      .app-shell {
+        padding: 40px 28px 72px;
+      }
+    }
+
+    /* Header */
+    .topbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 11px;
+      background: linear-gradient(135deg, #38bdf8 0%, #6366f1 100%);
+      display: grid;
+      place-items: center;
+      color: #07111f;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: -0.03em;
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font-size: clamp(1.25rem, 2.2vw, 1.55rem);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--text-primary);
+    }
+
+    .brand-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .status-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 13px;
+      border-radius: 999px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      font-family: "JetBrains Mono", monospace;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 10px var(--success);
+    }
+
+    /* Resolver Selector Pills */
+    .provider-section {
+      margin-bottom: 20px;
+    }
+
+    .section-label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .provider-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    @media (min-width: 640px) {
+      .provider-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (min-width: 900px) {
+      .provider-grid {
+        grid-template-columns: repeat(5, 1fr);
+      }
+    }
+
+    .provider-btn {
+      appearance: none;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      text-align: left;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.16s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .provider-btn:hover {
+      border-color: rgba(148, 163, 184, 0.32);
+      background: var(--bg-elevated);
+      color: var(--text-primary);
+    }
+
+    .provider-btn.active {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: var(--text-primary);
+      box-shadow: inset 0 0 0 1px rgba(56, 189, 248, 0.25);
+    }
+
+    .provider-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      line-height: 1.25;
+    }
+
+    .provider-route {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .provider-btn.active .provider-route {
+      color: var(--accent);
+    }
+
+    /* Main Workspace Grid */
+    .workspace-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    @media (min-width: 960px) {
+      .workspace-grid {
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 24px;
+      }
+    }
+
+    /* Cards */
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: var(--shadow-card);
+    }
+
+    @media (min-width: 768px) {
+      .card {
+        padding: 24px;
+      }
+    }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+    }
+
+    .card-desc {
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    .endpoint-pill {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.72rem;
+      padding: 5px 9px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      color: var(--accent);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* Form Controls */
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.84rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 7px;
+    }
+
+    .form-hint {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    .input-control,
+    .select-control {
+      width: 100%;
+      padding: 11px 13px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-input);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.9rem;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .input-control.mono {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.83rem;
+    }
+
+    .input-control::placeholder {
+      color: var(--text-muted);
+    }
+
+    .input-control:focus,
+    .select-control:focus {
+      outline: none;
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.16);
+    }
+
+    .option-panel {
+      display: none;
+      padding: 14px;
+      border-radius: var(--radius-md);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      margin-bottom: 18px;
+    }
+
+    .option-panel.visible {
+      display: block;
+    }
+
+    .actions-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      appearance: none;
+      border: 1px solid transparent;
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 11px 18px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.15s ease;
+    }
+
+    .btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    .btn-primary {
+      flex: 1 1 180px;
+      background: var(--accent);
+      color: #05101e;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: var(--accent-hover);
+    }
+
+    .btn-secondary {
+      background: var(--bg-elevated);
+      border-color: var(--border-subtle);
+      color: var(--text-secondary);
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      color: var(--text-primary);
+      border-color: rgba(148, 163, 184, 0.35);
+    }
+
+    .btn-sm {
+      padding: 6px 11px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      border-radius: 6px;
+    }
+
+    .spinner {
+      width: 15px;
+      height: 15px;
+      border: 2px solid rgba(5, 16, 30, 0.25);
+      border-top-color: #05101e;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+
+    .btn.loading .spinner {
+      display: inline-block;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Result / Output Area */
+    .result-state {
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 36px 16px;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      border: 1px dashed var(--border-subtle);
+      border-radius: var(--radius-md);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.74rem;
+      font-weight: 600;
+    }
+
+    .badge-success {
+      background: var(--success-soft);
+      color: var(--success);
+    }
+
+    .badge-error {
+      background: var(--danger-soft);
+      color: var(--danger);
+    }
+
+    .badge-info {
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .target-box {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      margin-bottom: 16px;
+    }
+
+    .target-label {
+      font-size: 0.74rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .target-value {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.85rem;
+      color: var(--text-primary);
+      word-break: break-all;
+      margin-bottom: 12px;
+    }
+
+    .target-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    @media (min-width: 520px) {
+      .meta-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .meta-item {
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+    }
+
+    .meta-key {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+
+    .meta-val {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.82rem;
+      color: var(--text-primary);
+      word-break: break-word;
+    }
+
+    .raw-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .raw-title {
+      font-size: 0.76rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    pre.json-view {
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.78rem;
+      line-height: 1.5;
+      color: #cbd5e1;
+      overflow-x: auto;
+      max-height: 340px;
+      white-space: pre;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--accent);
+      color: var(--text-primary);
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      font-weight: 500;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: all 0.2s ease;
+      z-index: 50;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">RR</div>
+        <div>
+          <h1 class="brand-title">RifqyResolver</h1>
+          <p class="brand-subtitle">Shortlink &amp; Key System Resolver via Vercel Serverless API</p>
+        </div>
+      </div>
+      <div class="status-chip">
+        <span class="status-dot"></span>
+        <span>5 ENDPOINTS ACTIVE</span>
+      </div>
+    </header>
+
+    <section class="provider-section" aria-label="Pilih Resolver">
+      <span class="section-label">Pilih Layanan Bypass</span>
+      <div class="provider-grid" id="providerGrid"></div>
+    </section>
+
+    <main class="workspace-grid">
+      <section class="card" aria-label="Form Input">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title" id="activeTitle">Safelinku Resolver</h2>
+            <p class="card-desc" id="activeDesc"></p>
+          </div>
+          <span class="endpoint-pill" id="activeEndpoint">/api/safelinku</span>
+        </div>
+
+        <form id="resolveForm" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="targetInput">
+              <span id="inputLabel">Target URL</span>
+              <button type="button" class="btn btn-secondary btn-sm" id="sampleBtn">Isi Contoh</button>
+            </label>
+            <input
+              type="text"
+              id="targetInput"
+              class="input-control mono"
+              placeholder="https://sfl.gl/D0Ze5"
+              autocomplete="off"
+              spellcheck="false"
+              required
+            />
+            <p class="form-hint" id="inputHint"></p>
+          </div>
+
+          <!-- Opsi khusus Safelinku -->
+          <div class="option-panel" id="panelSafelinku">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="preGoDelayInput">preGoDelay (ms, opsional)</label>
+              <input
+                type="number"
+                id="preGoDelayInput"
+                class="input-control mono"
+                min="0"
+                step="1"
+                placeholder="0"
+              />
+              <p class="form-hint">Default 0. Naikkan hanya jika upstream mulai mengembalikan status 429.</p>
+            </div>
+          </div>
+
+          <!-- Opsi khusus Sub4Unlock Resolve -->
+          <div class="option-panel" id="panelSub4Unlock">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="confirmUnlockSelect">confirmUnlock (opsional)</label>
+              <select id="confirmUnlockSelect" class="select-control mono">
+                <option value="">Default (true)</option>
+                <option value="true">true — Kirim konfirmasi unlock ke server</option>
+                <option value="false">false — Skip confirm, ambil langsung dari payload</option>
+              </select>
+              <p class="form-hint">Pilih false untuk respons lebih cepat bila memungkinkan.</p>
+            </div>
+          </div>
+
+          <div class="actions-row">
+            <button type="submit" class="btn btn-primary" id="submitBtn">
+              <span class="spinner" aria-hidden="true"></span>
+              <span id="submitText">Resolve Link</span>
+            </button>
+            <button type="button" class="btn btn-secondary" id="clearBtn">Reset</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="card" aria-label="Hasil Resolve">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title">Hasil Ekstraksi</h2>
+            <p class="card-desc">Output terstruktur dan respons JSON mentah dari endpoint.</p>
+          </div>
+          <span class="badge badge-info" id="statusBadge">IDLE</span>
+        </div>
+
+        <div class="result-state" id="resultContainer">
+          <div class="empty-state" id="emptyState">
+            Masukkan URL atau ticket di sebelah kiri lalu klik <strong>Resolve Link</strong>.
+          </div>
+
+          <div id="resultContent" style="display: none;">
+            <div class="target-box">
+              <div class="target-label" id="primaryOutputLabel">Destination / Key</div>
+              <div class="target-value" id="primaryOutputValue">-</div>
+              <div class="target-actions">
+                <button type="button" class="btn btn-secondary btn-sm" id="copyPrimaryBtn">Salin Hasil</button>
+                <a class="btn btn-secondary btn-sm" id="openLinkBtn" href="#" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">Buka URL</a>
+              </div>
+            </div>
+
+            <div class="meta-grid" id="metaGrid"></div>
+
+            <div class="raw-header">
+              <span class="raw-title">Raw JSON Response</span>
+              <button type="button" class="btn btn-secondary btn-sm" id="copyJsonBtn">Salin JSON</button>
+            </div>
+            <pre class="json-view" id="rawJsonView"></pre>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const PROVIDERS = [
+      {
+        id: "safelinku",
+        name: "Safelinku",
+        endpoint: "/api/safelinku",
+        desc: "Ekstrak URL tujuan akhir dari shortlink Safelinku.",
+        inputLabel: "Safelinku URL",
+        placeholder: "https://sfl.gl/D0Ze5",
+        hint: "Mendukung sfl.gl, safelinku.com, linku.to, dan lokerwfh.net.",
+        sample: "https://sfl.gl/D0Ze5",
+        panel: "panelSafelinku"
+      },
+      {
+        id: "sub4unlock",
+        name: "Sub4Unlock",
+        endpoint: "/api/sub4unlock",
+        desc: "Resolve URL tujuan dari tautan Sub4Unlock (resolve endpoint).",
+        inputLabel: "Sub4Unlock URL",
+        placeholder: "https://sub4unlock.co/I9zoNVN",
+        hint: "Masukkan URL sub4unlock.co/<alias> atau sub4unlock.io/<kode>.",
+        sample: "https://sub4unlock.co/I9zoNVN",
+        panel: "panelSub4Unlock"
+      },
+      {
+        id: "platoboost",
+        name: "Platoboost",
+        endpoint: "/api/platoboost",
+        desc: "Dapatkan whitelist key, nama layanan, dan sisa durasi key.",
+        inputLabel: "Platoboost Gateway URL / Ticket",
+        placeholder: "https://auth.platorelay.com/a?d=...",
+        hint: "Masukkan URL gateway auth.platorelay.com atau nilai ticket-nya saja.",
+        sample: "https://auth.platorelay.com/a?d=acDPpme9uTq8Tf5KGDlfE2vZVDRoCdH5C04KTPP5acl2KjZE810EDJx8AsxBL4DcTWWkZ0fw77mNzzO6Ji0gk4M2C0Cd8PadI8kQ9rIxYRNIhuIZc8At7PubKFoovBYHmNwEvccazXWodhwlIplGRFznwPO87YIZzFNBzey6txlI6Cqj7NUoZzKabRqkQPv8Y8PYqwlZ6bFEGhEwvdheih5Vp9fzxieCSDVWnVZwYW3jUZHKq57uXrCqELwjHTEjkDaem4bHlPMWwb9MTKLiagAu3oLPwN6f2a0uYgQxdR2O5u00844RNudt79T7GE5D5AoAKgm4svWCaTp0MCAx6PJdvb9pCsXAfGop1Lygoi40nsbzH5WRCbUKLbT05VtlffxjwkNVYJxeg37wGAJs7cwxCWhieVvry1Bx2eqbCiGB6ruAApCTdIJChVJ4Ok9MDPfgOaGl5Ey8LoLzVnObxFhFLllSC0KNQMWw4AUn",
+        panel: null
+      },
+      {
+        id: "linkvertise",
+        name: "Linkvertise",
+        endpoint: "/api/linkvertise",
+        desc: "Resolve Linkvertise dan jaringan terkait ke URL tujuan.",
+        inputLabel: "Linkvertise URL atau <userId>/<slug>",
+        placeholder: "https://linkvertise.com/119714/EzHub",
+        hint: "Mendukung linkvertise.com, link-to.net, link-hub.net, link-target.org/net, link-center.net, direct-link.net, atau <userId>/<slug>.",
+        sample: "https://linkvertise.com/119714/EzHub",
+        panel: null
+      },
+      {
+        id: "sub2unlock-bypass",
+        name: "Sub2Unlock Bypass",
+        endpoint: "/api/sub2unlock-bypass",
+        desc: "Bypass tautan Sub2Unlock langsung ke URL tujuan akhir.",
+        inputLabel: "Sub2Unlock Locked URL",
+        placeholder: "https://sub2unlock.com/hYTuA",
+        hint: "Masukkan URL locked link Sub2Unlock yang ingin di-bypass.",
+        sample: "https://sub2unlock.com/hYTuA",
+        panel: null
+      }
+    ];
+
+    let activeProvider = PROVIDERS[0];
+    let latestPrimaryValue = "";
+    let latestJsonString = "";
+
+    const providerGrid = document.getElementById("providerGrid");
+    const activeTitle = document.getElementById("activeTitle");
+    const activeDesc = document.getElementById("activeDesc");
+    const activeEndpoint = document.getElementById("activeEndpoint");
+    const inputLabel = document.getElementById("inputLabel");
+    const targetInput = document.getElementById("targetInput");
+    const inputHint = document.getElementById("inputHint");
+    const panelSafelinku = document.getElementById("panelSafelinku");
+    const panelSub4Unlock = document.getElementById("panelSub4Unlock");
+    const preGoDelayInput = document.getElementById("preGoDelayInput");
+    const confirmUnlockSelect = document.getElementById("confirmUnlockSelect");
+    const resolveForm = document.getElementById("resolveForm");
+    const submitBtn = document.getElementById("submitBtn");
+    const submitText = document.getElementById("submitText");
+    const clearBtn = document.getElementById("clearBtn");
+    const sampleBtn = document.getElementById("sampleBtn");
+
+    const statusBadge = document.getElementById("statusBadge");
+    const emptyState = document.getElementById("emptyState");
+    const resultContent = document.getElementById("resultContent");
+    const primaryOutputLabel = document.getElementById("primaryOutputLabel");
+    const primaryOutputValue = document.getElementById("primaryOutputValue");
+    const copyPrimaryBtn = document.getElementById("copyPrimaryBtn");
+    const openLinkBtn = document.getElementById("openLinkBtn");
+    const metaGrid = document.getElementById("metaGrid");
+    const rawJsonView = document.getElementById("rawJsonView");
+    const copyJsonBtn = document.getElementById("copyJsonBtn");
+    const toastEl = document.getElementById("toast");
+
+    let toastTimer = null;
+    function showToast(message) {
+      toastEl.textContent = message;
+      toastEl.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toastEl.classList.remove("show"), 2200);
+    }
+
+    function renderProviders() {
+      providerGrid.innerHTML = "";
+      PROVIDERS.forEach((p) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = `provider-btn${p.id === activeProvider.id ? " active" : ""}`;
+        btn.innerHTML = `
+          <span class="provider-name">${p.name}</span>
+          <span class="provider-route">${p.endpoint}</span>
+        `;
+        btn.addEventListener("click", () => selectProvider(p.id));
+        providerGrid.appendChild(btn);
+      });
+    }
+
+    function selectProvider(id) {
+      const found = PROVIDERS.find((p) => p.id === id);
+      if (!found) return;
+      activeProvider = found;
+
+      activeTitle.textContent = `${found.name} Resolver`;
+      activeDesc.textContent = found.desc;
+      activeEndpoint.textContent = found.endpoint;
+      inputLabel.textContent = found.inputLabel;
+      targetInput.placeholder = found.placeholder;
+      inputHint.textContent = found.hint;
+
+      panelSafelinku.classList.toggle("visible", found.panel === "panelSafelinku");
+      panelSub4Unlock.classList.toggle("visible", found.panel === "panelSub4Unlock");
+
+      renderProviders();
+    }
+
+    function setLoading(isLoading) {
+      submitBtn.disabled = isLoading;
+      submitBtn.classList.toggle("loading", isLoading);
+      submitText.textContent = isLoading ? "Memproses..." : "Resolve Link";
+      if (isLoading) {
+        statusBadge.className = "badge badge-info";
+        statusBadge.textContent = "LOADING";
+      }
+    }
+
+    function extractPrimaryResult(providerId, payload) {
+      const d = payload && typeof payload === "object" ? payload.data || payload : {};
+
+      if (providerId === "platoboost") {
+        return {
+          label: "Whitelist Key",
+          value: d.key || d.finalUrl || d.url || "",
+          isUrl: false
+        };
+      }
+
+      if (providerId === "sub2unlock-bypass") {
+        return {
+          label: "Destination URL",
+          value: d.destinationUrl || d.finalUrl || d.url || "",
+          isUrl: true
+        };
+      }
+
+      const candidate = d.finalUrl || d.destinationUrl || d.url || d.key || "";
+      return {
+        label: "Final URL",
+        value: candidate,
+        isUrl: /^https?:\/\//i.test(String(candidate))
+      };
+    }
+
+    function buildMetaItems(providerId, payload, elapsedClientMs) {
+      const items = [{ key: "Client Time", val: `${elapsedClientMs} ms` }];
+      const d = payload && typeof payload === "object" && payload.data ? payload.data : {};
+
+      const candidates = [
+        ["Service", d.serviceName || payload.project],
+        ["Alias / Slug", d.alias || d.slug],
+        ["Duration", d.durationHours !== undefined ? `${d.durationHours} jam` : null],
+        ["Hours Left", d.hoursLeft !== undefined ? `${d.hoursLeft} jam` : null],
+        ["Minutes Left", d.minutesLeft !== undefined ? `${d.minutesLeft} mnt` : null],
+        ["Upstream Time", d.elapsedMs !== undefined ? `${d.elapsedMs} ms` : null],
+        ["Tier / Flow", d.tier || d.flow],
+        ["Confirmed", d.confirmed !== undefined ? String(d.confirmed) : null]
+      ];
+
+      for (const [k, v] of candidates) {
+        if (v !== undefined && v !== null && String(v).trim() !== "") {
+          items.push({ key: k, val: String(v) });
+        }
+      }
+
+      return items;
+    }
+
+    function renderResponse(httpStatus, payload, elapsedClientMs) {
+      emptyState.style.display = "none";
+      resultContent.style.display = "block";
+
+      const isOk = httpStatus >= 200 && httpStatus < 300;
+      statusBadge.className = `badge ${isOk ? "badge-success" : "badge-error"}`;
+      statusBadge.textContent = `HTTP ${httpStatus}`;
+
+      const primary = extractPrimaryResult(activeProvider.id, payload);
+      latestPrimaryValue = primary.value || "";
+      latestJsonString = JSON.stringify(payload, null, 2);
+
+      primaryOutputLabel.textContent = primary.label;
+      primaryOutputValue.textContent = latestPrimaryValue || (isOk ? "Tidak ada nilai utama di respons" : (payload?.message || payload?.error || "Gagal memproses permintaan"));
+
+      copyPrimaryBtn.disabled = !latestPrimaryValue;
+
+      if (primary.isUrl && latestPrimaryValue) {
+        openLinkBtn.href = latestPrimaryValue;
+        openLinkBtn.style.display = "inline-flex";
+      } else {
+        openLinkBtn.href = "#";
+        openLinkBtn.style.display = "none";
+      }
+
+      const metaItems = buildMetaItems(activeProvider.id, payload, elapsedClientMs);
+      metaGrid.innerHTML = metaItems
+        .map(
+          (m) => `
+          <div class="meta-item">
+            <div class="meta-key">${m.key}</div>
+            <div class="meta-val">${m.val}</div>
+          </div>
+        `
+        )
+        .join("");
+
+      rawJsonView.textContent = latestJsonString;
+    }
+
+    resolveForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const rawUrl = targetInput.value.trim();
+
+      if (!rawUrl) {
+        targetInput.focus();
+        showToast("Parameter URL wajib diisi.");
+        return;
+      }
+
+      const query = new URLSearchParams({ url: rawUrl });
+
+      if (activeProvider.id === "safelinku") {
+        const delayVal = preGoDelayInput.value.trim();
+        if (delayVal !== "") {
+          query.set("preGoDelay", delayVal);
+        }
+      }
+
+      if (activeProvider.id === "sub4unlock") {
+        const confirmVal = confirmUnlockSelect.value;
+        if (confirmVal === "true" || confirmVal === "false") {
+          query.set("confirmUnlock", confirmVal);
+        }
+      }
+
+      const requestUrl = `${activeProvider.endpoint}?${query.toString()}`;
+      const startTime = performance.now();
+      setLoading(true);
+
+      try {
+        const res = await fetch(requestUrl, {
+          method: "GET",
+          headers: { Accept: "application/json" }
+        });
+
+        const text = await res.text();
+        let data;
+        try {
+          data = JSON.parse(text);
+        } catch {
+          data = { raw: text };
+        }
+
+        const elapsed = Math.round(performance.now() - startTime);
+        renderResponse(res.status, data, elapsed);
+      } catch (err) {
+        const elapsed = Math.round(performance.now() - startTime);
+        renderResponse(
+          500,
+          { error: "Network error", message: err?.message || "Gagal terhubung ke endpoint." },
+          elapsed
+        );
+      } finally {
+        setLoading(false);
+      }
+    });
+
+    sampleBtn.addEventListener("click", () => {
+      targetInput.value = activeProvider.sample;
+      targetInput.focus();
+    });
+
+    clearBtn.addEventListener("click", () => {
+      targetInput.value = "";
+      preGoDelayInput.value = "";
+      confirmUnlockSelect.value = "";
+      latestPrimaryValue = "";
+      latestJsonString = "";
+      resultContent.style.display = "none";
+      emptyState.style.display = "block";
+      statusBadge.className = "badge badge-info";
+      statusBadge.textContent = "IDLE";
+    });
+
+    copyPrimaryBtn.addEventListener("click", async () => {
+      if (!latestPrimaryValue) return;
+      try {
+        await navigator.clipboard.writeText(latestPrimaryValue);
+        showToast("Hasil berhasil disalin.");
+      } catch {
+        showToast("Gagal menyalin hasil.");
+      }
+    });
+
+    copyJsonBtn.addEventListener("click", async () => {
+      if (!latestJsonString) return;
+      try {
+        await navigator.clipboard.writeText(latestJsonString);
+        showToast("JSON berhasil disalin.");
+      } catch {
+        showToast("Gagal menyalin JSON.");
+      }
+    });
+
+    selectProvider(PROVIDERS[0].id);
+  </script>
+</body>
+</html>
